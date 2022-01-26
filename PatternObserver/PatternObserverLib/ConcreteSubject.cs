@@ -10,20 +10,21 @@ namespace PatternObserverLib
     public class ConcreteSubject : ISubject
     {
         private string name;
+        private List<IObserver> observers = new List<IObserver>();
 
         public void NotifyOdserver()
         {
-            //
+            foreach (IObserver observer in observers) observer.UpDate();
         }
 
-        public void RegisterObserver()
+        public void RegisterObserver(IObserver observer)
         {
-            //
+            observers.Add(observer);
         }
 
-        public void RemoveObserver()
+        public void RemoveObserver(IObserver observer)
         {
-            //
+            observers.Remove(observer);
         }
 
         public string GetState()
@@ -34,6 +35,7 @@ namespace PatternObserverLib
         public void SetState(string Name)
         {
             name = Name;
+            NotifyOdserver();
         }
     }
 }

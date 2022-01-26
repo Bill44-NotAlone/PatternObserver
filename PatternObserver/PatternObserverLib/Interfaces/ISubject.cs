@@ -8,8 +8,8 @@ namespace PatternObserverLib.Interfaces
 {
     public interface ISubject
     {
-        void RegisterObserver();
-        void RemoveObserver();
+        void RegisterObserver(IObserver observer);
+        void RemoveObserver(IObserver observer);
         void NotifyOdserver();
     }
 }
