@@ -7,17 +7,16 @@ using PatternObserverLib.Interfaces;
 
 namespace PatternObserverLib
 {
-    public class ConcreteObserver : IObserver
+    public class CurrentConditionsDisplay : IObserver, IDisplayElement
     {
-        private int counter = 0;
-        public void UpDate()
+        public void Display()
         {
-            counter = counter + 1;
+            throw new NotImplementedException();
         }
 
-        public int GetCounter()
+        public void UpDate()
         {
-            return counter;
+            throw new NotImplementedException();
         }
     }
 }
