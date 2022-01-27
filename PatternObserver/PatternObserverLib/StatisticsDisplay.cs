@@ -9,12 +9,17 @@ namespace PatternObserverLib
 {
     public class StatisticsDisplay : IObserver, IDisplayElement
     {
-        public void Display()
+        private double _mintemperature;
+        private double _middletemperature;
+        private double _maxtemperature;
+
+
+        public string Display()
         {
-            throw new NotImplementedException();
+            return $"{_maxtemperature}  - максимальная температура, {_mintemperature} - миниамльная температура, {_middletemperature} - средная температура";
         }
 
-        public void UpDate()
+        public string UpDate(double temperature, double humidity, double pressure)
         {
             throw new NotImplementedException();
         }

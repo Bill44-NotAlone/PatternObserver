@@ -7,21 +7,54 @@ using PatternObserverLib.Interfaces;
 
 namespace PatternObserverLib
 {
-    class WeatherData : ISubject
+    public class WeatherData : ISubject
     {
+        private List<IObserver> _observers = new List<IObserver>();
+        private double _temperature;
+        private double _humidity;
+        private double _pressure;
+
         public void NotifyOdserver()
         {
-            
+            foreach (IObserver observer in _observers) observer.UpDate(_temperature, _humidity, _pressure);
         }
 
         public void RegisterObserver(IObserver observer)
         {
-            throw new NotImplementedException();
+            _observers.Add(observer);
         }
 
         public void RemoveObserver(IObserver observer)
         {
-            throw new NotImplementedException();
+            _observers.RemoveAt(_observers.IndexOf(observer));
         }
+
+        public double GetTemperature()
+        {
+            return _temperature;
+        }
+        public double GetHumidity()
+        {
+            return _humidity;
+        }
+
+        public double GetPressure()
+        {
+            return _pressure;
+        }
+
+        public void MeasurementsChanged()
+        {
+            NotifyOdserver();
+        }
+
+        public void setMeasurements(float temperature, float humidity, float pressure)
+        {
+            this._temperature = temperature;
+            this._humidity = humidity;
+            this._pressure = pressure;
+            MeasurementsChanged();
+        }
+
     }
 }

@@ -8,6 +8,6 @@ namespace PatternObserverLib.Interfaces
 {
     public interface IObserver
     {
-        void UpDate();
+        string UpDate(double temperature, double humidity, double pressure);
     }
 }

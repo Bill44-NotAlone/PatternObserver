@@ -8,6 +8,6 @@ namespace PatternObserverLib.Interfaces
 {
     public interface IDisplayElement
     {
-        void Display();
+        string Display();
     }
 }

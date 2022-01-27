@@ -9,14 +9,21 @@ namespace PatternObserverLib
 {
     class ForecastDisplay : IObserver, IDisplayElement
     {
-        public void Display()
+        private double _weatherforecast;
+        private double _humidity;
+        private double _pressure;
+
+        public string UpDate(double temperature, double humidity, double pressure)
         {
-            throw new NotImplementedException();
+            this._weatherforecast = temperature;
+            this._humidity = humidity;
+            this._pressure = pressure;
+            return Display();
         }
 
-        public void UpDate()
+        public string Display()
         {
-            throw new NotImplementedException();
+            return $"{_weatherforecast} - прогноз погоды, {_humidity} - влажность, {_pressure}";
         }
     }
 }

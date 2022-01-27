@@ -9,14 +9,28 @@ namespace PatternObserverLib
 {
     public class CurrentConditionsDisplay : IObserver, IDisplayElement
     {
-        public void Display()
+        private double _temperature;
+        private double _humidity;
+        private double _pressure;
+        private ISubject _weatherData;
+
+        public CurrentConditionsDisplay(ISubject subject)
         {
-            throw new NotImplementedException();
+            this._weatherData = subject;
+            _weatherData.RegisterObserver(this);
         }
 
-        public void UpDate()
+        public string Display()
         {
-            throw new NotImplementedException();
+            return "Погода сйчас: " + _temperature.ToString() + "C - температура;" + _humidity.ToString() + " - влажность.";
+        }
+
+        public string UpDate(double temperature, double humidity, double pressure)
+        {
+            this._temperature = temperature;
+            this._humidity = humidity;
+            this._pressure = pressure;
+            return Display();
         }
     }
 }
