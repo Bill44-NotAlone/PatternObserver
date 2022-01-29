@@ -1,60 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PatternObserverLib.Interfaces;
 
 namespace PatternObserverLib
 {
     public class WeatherData : ISubject
     {
-        private List<IObserver> _observers = new List<IObserver>();
-        private double _temperature;
-        private double _humidity;
-        private double _pressure;
+        public WeatherData()
+        {
+            Random random = new Random();
+            foreach (string key in variables) privatekey.Add(key, random.Next(1, 100));
+        }
+
+        private List<IObserver> observers = new List<IObserver>();
+        private Dictionary<string, int> privatekey = new Dictionary<string, int>();
+
+        private List<string> variables = new List<string>()
+        {
+            "temperature",
+            "humidity",
+            "pressure",
+            "mintemperature",
+            "middletemperature",
+            "maxtemperature",
+            "shumidity",
+            "spressure",
+            "fweatherforecast",
+            "fhumidity",
+            "fpressure",
+            "ctemperature",
+            "chumidity",
+            "cpressure"
+        };
 
         public void NotifyOdserver()
         {
-            foreach (IObserver observer in _observers) observer.UpDate(_temperature, _humidity, _pressure);
+            foreach (IObserver observer in observers) observer.UpDate(privatekey);
         }
 
         public void RegisterObserver(IObserver observer)
         {
-            _observers.Add(observer);
+            observers.Add(observer);
         }
 
         public void RemoveObserver(IObserver observer)
         {
-            _observers.RemoveAt(_observers.IndexOf(observer));
+            observers.RemoveAt(observers.IndexOf(observer));
         }
 
         public double GetTemperature()
         {
-            return _temperature;
+            return privatekey["temperature"];
         }
         public double GetHumidity()
         {
-            return _humidity;
+            return privatekey["temperature"];
         }
 
         public double GetPressure()
         {
-            return _pressure;
+            return privatekey["pressure"];
         }
 
-        public void MeasurementsChanged()
+        public int this[string variable]
         {
-            NotifyOdserver();
+            set
+            {
+                privatekey[variable] = value;
+                this.NotifyOdserver();
+            }
         }
-
-        public void setMeasurements(float temperature, float humidity, float pressure)
-        {
-            this._temperature = temperature;
-            this._humidity = humidity;
-            this._pressure = pressure;
-            MeasurementsChanged();
-        }
-
     }
 }

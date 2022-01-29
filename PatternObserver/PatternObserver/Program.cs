@@ -12,26 +12,27 @@ namespace PatternObserver
     {
         static void Main(string[] args)
         {
-            List<ConcreteObserver> observers = new List<ConcreteObserver>() { new ConcreteObserver(), new ConcreteObserver()};
-            ConcreteSubject subject = new ConcreteSubject();
+            WeatherData weatherData = new WeatherData();
 
-            subject.RegisterObserver(observers[0]);
-            subject.SetState("Александр");
-            CounterInConsole(observers);
-            subject.RegisterObserver(observers[1]);
-            subject.SetState("Владимир");
-            CounterInConsole(observers);
-            subject.RemoveObserver(observers[1]);
-            subject.SetState("Лев");
-            CounterInConsole(observers);
-            
+            List<IDisplayElement> displays = new List<IDisplayElement>() {
+                new CurrentConditionsDisplay(),
+                new ForecastDisplay(),
+                new StatisticsDisplay()
+            };
+
+            weatherData.RegisterObserver((CurrentConditionsDisplay)displays[0]);
+            weatherData.RegisterObserver((ForecastDisplay)displays[1]);
+            weatherData.RegisterObserver((StatisticsDisplay)displays[2]);
+
+            foreach (IDisplayElement observer in displays)
+                Console.WriteLine(observer.Display());
+
+            weatherData.NotifyOdserver();
+
+            foreach (IDisplayElement observer in displays)
+                Console.WriteLine(observer.Display());
+
             Console.ReadKey();
-        }
-
-        private static void CounterInConsole(List<ConcreteObserver> observers)
-        {
-            foreach (ConcreteObserver observer in observers) Console.Write(observer.GetCounter()+" ");
-            Console.WriteLine();
         }
     }
 }

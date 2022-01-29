@@ -7,23 +7,22 @@ using PatternObserverLib.Interfaces;
 
 namespace PatternObserverLib
 {
-    class ForecastDisplay : IObserver, IDisplayElement
+    public class ForecastDisplay : IObserver, IDisplayElement
     {
-        private double _weatherforecast;
-        private double _humidity;
-        private double _pressure;
-
-        public string UpDate(double temperature, double humidity, double pressure)
-        {
-            this._weatherforecast = temperature;
-            this._humidity = humidity;
-            this._pressure = pressure;
-            return Display();
-        }
+        private double fweatherforecast;
+        private double fhumidity;
+        private double fpressure;
 
         public string Display()
         {
-            return $"{_weatherforecast} - прогноз погоды, {_humidity} - влажность, {_pressure}";
+            return $"{fweatherforecast} - прогноз погоды, {fhumidity} - влажность, {fpressure} - давление.";
+        }
+
+        public void UpDate(Dictionary<string, int> pair)
+        {
+            fweatherforecast = pair["fweatherforecast"];
+            fhumidity = pair["fhumidity"];
+            fpressure = pair["fpressure"];
         }
     }
 }

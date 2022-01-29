@@ -9,19 +9,26 @@ namespace PatternObserverLib
 {
     public class StatisticsDisplay : IObserver, IDisplayElement
     {
-        private double _mintemperature;
-        private double _middletemperature;
-        private double _maxtemperature;
+        private double mintemperature;
+        private double middletemperature;
+        private double maxtemperature;
+        private double shumidity;
+        private double spressure;
 
 
         public string Display()
         {
-            return $"{_maxtemperature}  - максимальная температура, {_mintemperature} - миниамльная температура, {_middletemperature} - средная температура";
+            return $"{maxtemperature}  - максимальная температура, {mintemperature} - миниамльная температура, " +
+                $"{middletemperature} - средная температура, {shumidity} - влажность и {spressure} - давление.";
         }
 
-        public string UpDate(double temperature, double humidity, double pressure)
+        public void UpDate(Dictionary<string, int> pair)
         {
-            throw new NotImplementedException();
+            mintemperature = pair["mintemperature"];
+            middletemperature = pair["middletemperature"];
+            maxtemperature = pair["maxtemperature"];
+            shumidity = pair["shumidity"];
+            spressure = pair["spressure"];
         }
     }
 }
