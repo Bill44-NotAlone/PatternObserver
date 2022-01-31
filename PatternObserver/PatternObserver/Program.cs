@@ -32,6 +32,11 @@ namespace PatternObserver
             foreach (IDisplayElement observer in displays)
                 Console.WriteLine(observer.Display());
 
+            weatherData.RemoveObserver((ForecastDisplay)displays[1]);
+
+            weatherData["maxtemperature"] = 2000;
+            foreach (IDisplayElement observer in displays)
+                Console.WriteLine(observer.Display());
             Console.ReadKey();
         }
     }

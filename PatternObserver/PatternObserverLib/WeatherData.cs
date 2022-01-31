@@ -48,20 +48,6 @@ namespace PatternObserverLib
             observers.RemoveAt(observers.IndexOf(observer));
         }
 
-        public double GetTemperature()
-        {
-            return privatekey["temperature"];
-        }
-        public double GetHumidity()
-        {
-            return privatekey["temperature"];
-        }
-
-        public double GetPressure()
-        {
-            return privatekey["pressure"];
-        }
-
         public int this[string variable]
         {
             set
